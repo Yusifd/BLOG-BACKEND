@@ -1,4 +1,5 @@
 import express from 'express';
+import multer from 'multer';
 
 import mongoose from 'mongoose';
 
@@ -17,6 +18,12 @@ mongoose
     .catch((err)=> console.log('DB error',err));
 
 const app = express();
+
+const storage = multer.diskStorage({
+    destination: (_, __, cb) => {
+        cb(null, 'uploads');
+    },
+});
 
 app.use(express.json());
 
